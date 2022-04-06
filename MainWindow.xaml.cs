@@ -20,6 +20,7 @@ namespace TestLogin_Romanov
     /// </summary>
     public partial class MainWindow : Window
     {
+        public Users currentUser;
         public MainWindow()
         {
             InitializeComponent();
@@ -57,7 +58,8 @@ namespace TestLogin_Romanov
                 textBoxEmail.ToolTip = "Почта указана неверно";
                 textBoxEmail.Background = Brushes.Red;
                 
-            } else
+            }
+            else
             {
                 textBoxLogin.ToolTip = "";
                 textBoxLogin.Background = Brushes.Transparent;
@@ -71,12 +73,19 @@ namespace TestLogin_Romanov
                 textBoxEmail.Background = Brushes.Transparent;
 
                 MessageBox.Show("Регистрация прошла успешно!", "Результат");
+                int max = BaseModel.GetContext().Users.ToList().Select(s => s.id).Max();
+                currentUser = new Users(++max,login,pass,email);
+                    BaseModel.GetContext().Users.Add(currentUser);
+                try
+                {
+                BaseModel.GetContext().SaveChanges();
+                }
+                catch
+                {
+                    MessageBox.Show("ERROR");
+                }
             }
 
-
-
-
-            // MessageBox.Show($"Login: {login} Pas: {pass} Email: {email}", "Введенные данные:");
         }
     }
 }
