@@ -24,5 +24,15 @@ namespace TestLogin_Romanov
         {
             InitializeComponent();
         }
+
+        private void Button_Reg_Click(object sender, RoutedEventArgs e)
+        {
+            string login = textBoxLogin.Text;
+            string pass = textBoxPass.Password;
+            string pass_ = textBoxPass_.Password;
+            string email = textBoxEmail.Text;
+
+
+        }
     }
 }
