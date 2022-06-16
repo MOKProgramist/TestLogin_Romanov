@@ -15,7 +15,7 @@ namespace TestLogin_Romanov
             return _context;
         }
         public BaseModel()
-            : base("name=LoginAppEntities")
+            : base("name=BaseModel")
         {
         }
 
