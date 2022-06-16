@@ -12,10 +12,11 @@ namespace TestLogin_Romanov
     using System;
     using System.Collections.Generic;
     
-    public partial class Users
+    public partial class C__MigrationHistory
     {
-        public int id { get; set; }
-        public string login { get; set; }
-        public string password { get; set; }
+        public string MigrationId { get; set; }
+        public string ContextKey { get; set; }
+        public byte[] Model { get; set; }
+        public string ProductVersion { get; set; }
     }
 }

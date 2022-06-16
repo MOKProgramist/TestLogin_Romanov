@@ -22,10 +22,8 @@
                 </Grid>
 
                 <TextBox x:Name="textBoxLogin" materialDesign:HintAssist.Hint="Введите логин" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-                <PasswordBox x:Name="textBoxPass" materialDesign:HintAssist.Hint="Введите пароль" Style="{StaticResource MaterialDesignFloatingHintPasswordBox }" />
-                <PasswordBox x:Name="textBoxPass_" materialDesign:HintAssist.Hint="Потвердите пароль" Style="{StaticResource MaterialDesignFloatingHintPasswordBox }" />
-                <TextBox x:Name="textBoxEmail" materialDesign:HintAssist.Hint="Введите почту" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-                <Button Content="Зарегистрироваться" Margin="0 20" Click="Button_Reg_Click"/>
+                <PasswordBox x:Name="textBoxPass" materialDesign:HintAssist.Hint="Введите пароль" Style="{StaticResource MaterialDesignFloatingHintPasswordBox }" Cursor="Arrow" />
+                <Button Content="Войти" Margin="0 20" Click="Button_Reg_Click" Cursor="Hand"/>
             </StackPanel>
             
         </Border>

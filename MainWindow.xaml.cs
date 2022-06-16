@@ -21,21 +21,23 @@ namespace TestLogin_Romanov
     public partial class MainWindow : Window
     {
         public Users currentUser;
+        private BaseModel db;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            db = new BaseModel();
         }
 
         private void Button_Reg_Click(object sender, RoutedEventArgs e)
         {
             string login = textBoxLogin.Text.Trim();
             string pass = textBoxPass.Password.Trim();
-            string pass_ = textBoxPass_.Password.Trim();
-            string email = textBoxEmail.Text.ToLower().Trim();
 
             if(login.Length < 5)
             {
-                textBoxLogin.ToolTip = "Поле введено не верно";
+                textBoxLogin.ToolTip = "Логин меньше 6 символов";
                 textBoxLogin.Background = Brushes.Red;
             } else
 
@@ -43,22 +45,7 @@ namespace TestLogin_Romanov
             {
                 textBoxPass.ToolTip = "Пароль должен содержать не менее 6 символов";
                 textBoxPass.Background = Brushes.Red;
-            } else 
-
-            if (pass.Length != pass_.Length )
-            {
-                textBoxPass.ToolTip = "Введеные пароли не совпадают";
-                textBoxPass_.ToolTip = "Введеные пароли не совпадают";
-                textBoxPass.Background = Brushes.Red;
-                textBoxPass_.Background = Brushes.Red;
-            } else 
-            
-            if(email.Length < 5 || !email.Contains("@") || !email.Contains("."))
-            {
-                textBoxEmail.ToolTip = "Почта указана неверно";
-                textBoxEmail.Background = Brushes.Red;
-                
-            }
+            } 
             else
             {
                 textBoxLogin.ToolTip = "";
@@ -66,25 +53,32 @@ namespace TestLogin_Romanov
                 
                 textBoxPass.ToolTip = "";
                 textBoxPass.Background = Brushes.Transparent;
-                textBoxPass_.ToolTip = "";
-                textBoxPass_.Background = Brushes.Transparent;
 
-                textBoxEmail.ToolTip = "";
-                textBoxEmail.Background = Brushes.Transparent;
-
-                MessageBox.Show("Регистрация прошла успешно!", "Результат");
-                int max = BaseModel.GetContext().Users.ToList().Select(s => s.id).Max();
-                currentUser = new Users(++max,login,pass,email);
-                    BaseModel.GetContext().Users.Add(currentUser);
+             
+                Users currentUser = new Users(login, pass);
+               
+                BaseModel.GetContext().Users.Add(currentUser);
                 try
                 {
-                BaseModel.GetContext().SaveChanges();
+                    MessageBox.Show("Регистрация прошла успешно!", "Результат");
+                    // сохраняем результат
+                    BaseModel.GetContext().SaveChanges();
                 }
-                catch
+                catch (Exception ex)
                 {
-                    MessageBox.Show("ERROR");
+                    MessageBox.Show("Ошибка регистрации. {0}", ex.Message);
                 }
             }
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
 
         }
     }
