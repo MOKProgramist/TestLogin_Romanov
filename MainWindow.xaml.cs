@@ -54,13 +54,24 @@ namespace TestLogin_Romanov
                 textBoxPass.ToolTip = "";
                 textBoxPass.Background = Brushes.Transparent;
 
-             
-                Users currentUser = new Users(login, pass);
-               
-                BaseModel.GetContext().Users.Add(currentUser);
+                // для теста
+                string email = "email@artcolle.ru";
+
+                // int max = 1;
+
+                // ищем пользоватателя с таким логином, если есть, то ошибка
+                var findUser = BaseModel.GetContext().Users.Where(p => p.login == login);
+                if(findUser != null)
+                {
+                    MessageBox.Show($"Пользователь с таким логином уже есть в базе, используйте другой логин", "Ошибка");
+                    return;
+                }
+                currentUser = new Users(login, pass, email);
+                Users newUser = BaseModel.GetContext().Users.Add(currentUser);
+
                 try
                 {
-                    MessageBox.Show("Регистрация прошла успешно!", "Результат");
+                    MessageBox.Show($"Регистрация прошла успешно! Ваш айди: {newUser.id}", "Результат");
                     // сохраняем результат
                     BaseModel.GetContext().SaveChanges();
                 }

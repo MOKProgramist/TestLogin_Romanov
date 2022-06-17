@@ -9,12 +9,13 @@
     public partial class Users
     {
         public Users() { }
-        public Users(string log, string pass)
+        public Users(string log, string pass, string em)
         {
             login = log;
             password = pass;
+            email = em;
         }
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+
         public int id { get; set; }
 
         [Required]
@@ -23,5 +24,8 @@
 
         [StringLength(20)]
         public string password { get; set; }
+
+        [StringLength(100)]
+        public string email { get; set; }
     }
 }

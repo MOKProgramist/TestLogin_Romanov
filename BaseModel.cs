@@ -17,6 +17,7 @@ namespace TestLogin_Romanov
         public BaseModel()
             : base("name=BaseModel")
         {
+
         }
 
         public virtual DbSet<Users> Users { get; set; }
